@@ -99,6 +99,15 @@ section.soft{background:var(--bg2)}
 .b1{background:linear-gradient(100deg,var(--z1),var(--z2));color:#fff;border-color:transparent}
 .b2{background:var(--card);color:var(--fg)}
 
+.plat{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.pf{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;min-width:230px;box-shadow:var(--sh)}
+.pf svg{width:34px;height:34px;flex:none}
+.pf b{display:block;font:600 17px/1.2 var(--f-h)}
+.pf span{font:500 12px/1.3 var(--f-m);letter-spacing:.06em;color:var(--faint)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+@media (max-width:860px){.steps{grid-template-columns:1fr}}
+.stp{border-left:3px solid var(--z1);padding:4px 0 4px 16px}
+.stp b{display:block;font:600 17px/1.3 var(--f-h)}.stp span{color:var(--dim);font-size:15.5px}
 footer{border-top:1px solid var(--line);padding:34px 0 48px;color:var(--faint);font-size:14px}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
 footer img{height:18px;width:auto}
@@ -116,6 +125,7 @@ footer a{color:var(--dim);text-decoration:none;margin-left:16px}
     <nav>
       <a href="#products">Products</a>
       <a class="hide-s" href="#together">Together</a>
+      <a class="hide-s" href="#deploy">Deploy</a>
       <a class="hide-s" href="#why">Why free</a>
       <button class="tgl" id="tg" type="button" aria-label="Switch light or dark theme">Theme</button>
     </nav>
@@ -145,7 +155,8 @@ footer a{color:var(--dim);text-decoration:none;margin-left:16px}
         <p class="q">Stops it running.</p>
         <p>Application control for Windows, built from what your own fleet runs. Nothing starts unless a person approved it, so ransomware nobody has seen before does not run either.</p>
         <p>The AI reads the queue and drafts every decision: what each app is, how far to trust it, and what to keep blocked. A second AI pass reviews the policy before it ships. You approve every rule.</p>
-        <ul><li>Allowlisting</li><li>AI-drafted decisions</li><li>AI policy review</li><li>Simulation</li><li>Audit first</li></ul>
+        <p>It knows every binary and driver in the estate, so it also tracks known vulnerabilities (CVEs) per machine, from what is actually running, and flags suspicious files: unsigned programs in user folders and names imitating Windows.</p>
+        <ul><li>Allowlisting</li><li>AI-drafted decisions</li><li>AI policy review</li><li>CVE tracking</li><li>Suspicious files</li><li>Simulation</li></ul>
         <span class="go">Visit ENFORZ &rarr;</span>
       </a>
     </div>
@@ -167,6 +178,26 @@ footer a{color:var(--dim);text-decoration:none;margin-left:16px}
   </div>
 </section>
 
+<section class="band soft" id="deploy">
+  <div class="wrap">
+    <div class="head">
+      <span class="k">Deployment</span>
+      <h2>Import it, boot it, <span class="grad">sign in</span></h2>
+      <p class="sub">Both platforms ship as ready-made appliances: one virtual machine with everything inside, the operating system hardened and patched as part of each release. There is nothing to build and no installer to get right.</p>
+    </div>
+    <div class="plat">
+      <div class="pf"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="3" y="6" width="28" height="18" rx="3" fill="none" stroke="var(--z1)" stroke-width="2.4"/><path d="M12 29h10M17 24v5" stroke="var(--z1)" stroke-width="2.4" stroke-linecap="round"/><rect x="8" y="11" width="8" height="8" rx="1.5" fill="var(--z2)"/><rect x="18" y="11" width="8" height="8" rx="1.5" fill="var(--z1)"/></svg><div><b>Hyper-V</b><span>VHDX image</span></div></div>
+      <div class="pf"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M5 10l12-6 12 6v14l-12 6-12-6z" fill="none" stroke="var(--z1)" stroke-width="2.4" stroke-linejoin="round"/><path d="M5 10l12 6 12-6M17 16v14" stroke="var(--z2)" stroke-width="2.4" stroke-linejoin="round"/></svg><div><b>VMware</b><span>OVA appliance</span></div></div>
+      <div class="pf"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M10 26a6 6 0 0 1-.6-12A8.5 8.5 0 0 1 26 15.8 5.2 5.2 0 0 1 25 26z" fill="none" stroke="var(--z1)" stroke-width="2.4" stroke-linejoin="round"/><path d="M17 23v-7m-3 3 3-3 3 3" stroke="var(--z2)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Cloud</b><span>Cloud images available</span></div></div>
+    </div>
+    <div class="steps">
+      <div class="stp"><b>1. Import one file</b><span>Into Hyper-V or VMware, or start the cloud image. It boots configured.</span></div>
+      <div class="stp"><b>2. Sign in</b><span>Connect your Microsoft 365 tenant or enrol a first ring of machines, in audit mode.</span></div>
+      <div class="stp"><b>3. Updates arrive as releases</b><span>The platform and the system underneath are patched together, so there is no drift to manage.</span></div>
+    </div>
+  </div>
+</section>
+
 <section class="band" id="why">
   <div class="wrap">
     <div class="head">
@@ -177,7 +208,7 @@ footer a{color:var(--dim);text-decoration:none;margin-left:16px}
     <div class="tiles">
       <div class="ti"><b>Free to run</b><span>No licence, no subscription, no per-seat charge, and no paid tier waiting later. Your cost is the server it runs on.</span></div>
       <div class="ti"><b>Yours</b><span>Each platform is installed on your own hardware. Nothing is sent to us: no licence check, no activation, no usage reporting.</span></div>
-      <div class="ti"><b>Arrives as an appliance</b><span>One virtual machine for Hyper-V or VMware, hardened and patched as part of each release.</span></div>
+      <div class="ti"><b>Arrives as an appliance</b><span>Hyper-V, VMware or a cloud image, hardened and patched as part of each release.</span></div>
       <div class="ti"><b>Written to be read</b><span>The rules that must never be broken are written down in plain language, with the reason each one exists.</span></div>
     </div>
     <div class="cta">
