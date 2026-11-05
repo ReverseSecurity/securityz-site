@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SECURITYZ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="SECURITYZ builds PHISHZ and ENFORZ: free, self-hosted security for organisations without a security budget. PHISHZ stops it arriving. ENFORZ stops it running.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="brand/apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Same system as the PHISHZ and ENFORZ sites: dark-first, light on request. */
+:root{
+  --bg:#080B13; --bg2:#0C111C; --card:#121926; --card2:#18212F;
+  --line:#242F45; --fg:#F0F3F8; --dim:#A6B2C6; --faint:#6D7B92;
+  --z1:#27B0F8; --z2:#008DEB; --accent:#4DC3FA; --a-dim:rgba(39,176,248,.13);
+  --sh:0 28px 70px -40px rgba(0,0,0,.9);
+  --f-h:'Familjen Grotesk','Helvetica Neue',Arial,sans-serif;
+  --f-b:'Figtree','Helvetica Neue',Arial,sans-serif;
+  --f-m:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --r:16px; color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#F5F8FC; --bg2:#FFFFFF; --card:#FFFFFF; --card2:#EDF2F8;
+  --line:#D6DFEC; --fg:#080D18; --dim:#4A586E; --faint:#6F7D91;
+  --accent:#0A6FBF; --a-dim:rgba(0,141,235,.09); --sh:0 20px 48px -30px rgba(15,25,50,.3);
+  color-scheme:light;
+}}
+:root[data-theme="light"]{
+  --bg:#F5F8FC; --bg2:#FFFFFF; --card:#FFFFFF; --card2:#EDF2F8;
+  --line:#D6DFEC; --fg:#080D18; --dim:#4A586E; --faint:#6F7D91;
+  --accent:#0A6FBF; --a-dim:rgba(0,141,235,.09); --sh:0 20px 48px -30px rgba(15,25,50,.3);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 17px/1.6 var(--f-b);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}
+.k{font:500 12.5px/1 var(--f-m);letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+h1,h2,h3{font-family:var(--f-h);letter-spacing:-.02em;margin:0}
+.grad{background:linear-gradient(100deg,var(--z1),var(--z2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* light/dark logo swap */
+.on-dark{display:block}.on-light{display:none}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .on-dark{display:none}:root:not([data-theme="dark"]) .on-light{display:block}}
+:root[data-theme="light"] .on-dark{display:none}:root[data-theme="light"] .on-light{display:block}
+:root[data-theme="dark"] .on-dark{display:block}:root[data-theme="dark"] .on-light{display:none}
+
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+header .logo img{height:24px;width:auto}
+header nav{display:flex;gap:4px;align-items:center}
+header nav a{font:500 12.5px/1 var(--f-m);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-decoration:none;padding:9px 12px;border-radius:999px}
+header nav a:hover{color:var(--fg);background:var(--card2)}
+.tgl{font:500 13px/1 var(--f-b);color:var(--dim);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
+@media (max-width:720px){header nav a.hide-s{display:none}}
+
+.hero{padding:clamp(64px,10vw,120px) 0 clamp(48px,7vw,84px);position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-30% -10% auto auto;width:70%;height:120%;background:radial-gradient(closest-side,rgba(39,176,248,.16),transparent 70%);pointer-events:none}
+.hero .mark{max-width:min(760px,100%);height:auto;margin:0 0 34px}
+.hero h1{font-size:clamp(34px,5.2vw,60px);line-height:1.06;max-width:17ch}
+.hero .lede{font-size:clamp(17px,1.6vw,20px);color:var(--dim);max-width:60ch;margin:22px 0 0}
+
+.prod{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:clamp(28px,4vw,40px)}
+@media (max-width:860px){.prod{grid-template-columns:1fr}}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:clamp(24px,3vw,34px);box-shadow:var(--sh);display:flex;flex-direction:column;gap:16px;text-decoration:none;transition:transform .18s,border-color .18s}
+.pc:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--z1) 55%,var(--line))}
+.pc .lg{height:62px;display:flex;align-items:center}
+.pc .lg img{max-height:62px;width:auto;max-width:100%}
+.pc .lg.ph img{max-height:72px}
+.pc .q{font:600 22px/1.25 var(--f-h);margin:0}
+.pc p{margin:0;color:var(--dim)}
+.pc ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.pc li{font:500 12px/1 var(--f-m);letter-spacing:.06em;color:var(--dim);background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:7px 11px}
+.pc .go{margin-top:auto;font:600 15px/1 var(--f-b);color:var(--accent)}
+
+section.band{padding:clamp(56px,8vw,96px) 0;border-top:1px solid var(--line)}
+section.soft{background:var(--bg2)}
+.head h2{font-size:clamp(28px,3.6vw,42px);line-height:1.1;margin-top:12px;max-width:24ch}
+.head .sub{color:var(--dim);max-width:64ch;margin:16px 0 0;font-size:18px}
+
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;counter-reset:s}
+@media (max-width:860px){.flow{grid-template-columns:1fr}}
+.st{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.st .n{font:500 12px/1 var(--f-m);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.st h3{font-size:21px;margin:12px 0 8px}
+.st p{margin:0;color:var(--dim)}
+
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
+@media (max-width:980px){.tiles{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.tiles{grid-template-columns:1fr}}
+.ti{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.ti b{display:block;font:600 17px/1.3 var(--f-h);margin-bottom:8px}
+.ti span{color:var(--dim);font-size:15.5px}
+
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.b{display:inline-flex;align-items:center;gap:8px;font:600 15px/1 var(--f-b);padding:14px 20px;border-radius:999px;text-decoration:none;border:1px solid var(--line)}
+.b1{background:linear-gradient(100deg,var(--z1),var(--z2));color:#fff;border-color:transparent}
+.b2{background:var(--card);color:var(--fg)}
+
+footer{border-top:1px solid var(--line);padding:34px 0 48px;color:var(--faint);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+footer img{height:18px;width:auto}
+footer a{color:var(--dim);text-decoration:none;margin-left:16px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="SECURITYZ home">
+      <img class="on-dark" src="brand/securityz-wordmark-on-dark.webp" alt="SECURITYZ" width="4328" height="426">
+      <img class="on-light" src="brand/securityz-wordmark-on-light.webp" alt="SECURITYZ" width="4328" height="426">
+    </a>
+    <nav>
+      <a href="#products">Products</a>
+      <a class="hide-s" href="#together">Together</a>
+      <a class="hide-s" href="#why">Why free</a>
+      <button class="tgl" id="tg" type="button" aria-label="Switch light or dark theme">Theme</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <img class="mark on-dark" src="brand/securityz-on-dark.webp" alt="SECURITYZ: stop it arriving, stop it running" width="2377" height="344">
+    <img class="mark on-light" src="brand/securityz-on-light.webp" alt="SECURITYZ: stop it arriving, stop it running" width="2377" height="344">
+    <p class="k" style="margin:0 0 18px">AI does the reading. You make the call.</p>
+    <h1>Enterprise security for the organisations <span class="grad">that cannot buy it</span>.</h1>
+    <p class="lede">SECURITYZ is a non-profit. We build two platforms that close the two doors almost every attack uses: the message a person is persuaded to act on, and the program that runs afterwards. Both run on your own hardware, both are free, and neither needs the other.</p>
+
+    <div class="prod" id="products">
+      <a class="pc" href="https://reversesecurity.github.io/phishz-site/">
+        <div class="lg ph"><img class="on-dark" src="brand/phishz-on-dark.webp" alt="PHISHZ" width="487" height="130"><img class="on-light" src="brand/phishz-on-light.webp" alt="PHISHZ" width="488" height="129"></div>
+        <p class="q">Stops it arriving.</p>
+        <p>Phishing stopped being an email problem. PHISHZ watches mail, Teams and shared files, removes every copy of what got through, and rehearses your people against the channels no filter can reach.</p>
+        <ul><li>Mail</li><li>Teams</li><li>Shared files</li><li>Remediation</li><li>Training</li></ul>
+        <span class="go">Visit PHISHZ &rarr;</span>
+      </a>
+      <a class="pc" href="https://reversesecurity.github.io/enforz-site/">
+        <div class="lg"><img class="on-dark" src="brand/enforz-on-dark.webp" alt="ENFORZ" width="1585" height="300"><img class="on-light" src="brand/enforz-on-light.webp" alt="ENFORZ" width="1585" height="300"></div>
+        <p class="q">Stops it running.</p>
+        <p>Application control for Windows, built from what your own fleet runs. Nothing starts unless a person approved it, so ransomware nobody has seen before does not run either. Audit first, enforced ring by ring, with a way back.</p>
+        <ul><li>Allowlisting</li><li>Human approval</li><li>Simulation</li><li>AI-assisted review</li><li>Drivers</li></ul>
+        <span class="go">Visit ENFORZ &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="band soft" id="together">
+  <div class="wrap">
+    <div class="head">
+      <span class="k">Two halves of one argument</span>
+      <h2>PHISHZ stops it arriving. <span class="grad">ENFORZ stops it running.</span></h2>
+      <p class="sub">Same Z, same team, the same idea from opposite ends. Each is useful on its own. Together, an attack has to beat both.</p>
+    </div>
+    <div class="flow">
+      <div class="st"><span class="n">The way in</span><h3>A person is persuaded</h3><p>Almost every incident starts with someone opening, clicking or approving something. PHISHZ catches the lure and trains people for the ones that get through.</p></div>
+      <div class="st"><span class="n">The thing that runs</span><h3>Something tries to start</h3><p>Eventually somebody clicks anyway. ENFORZ means whatever was downloaded does not execute, because it was never approved. No detection has to recognise it first.</p></div>
+      <div class="st"><span class="n">Together</span><h3>Everything else can fail</h3><p>The lure is caught before it lands, people are ready for the rest, and the payload cannot start even if every other control misses it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="why">
+  <div class="wrap">
+    <div class="head">
+      <span class="k">Who we are</span>
+      <h2>Built by a non-profit, <span class="grad">for</span> non-profits</h2>
+      <p class="sub">An organisation without a security budget is not a smaller target. It is an easier one, and attackers have worked that out. We think you cannot build a more secure future by selling it only to the organisations that can afford it.</p>
+    </div>
+    <div class="tiles">
+      <div class="ti"><b>Free to run</b><span>No licence, no subscription, no per-seat charge, and no paid tier waiting later. Your cost is the server it runs on.</span></div>
+      <div class="ti"><b>Yours</b><span>Each platform is installed on your own hardware. Nothing is sent to us: no licence check, no activation, no usage reporting.</span></div>
+      <div class="ti"><b>Arrives as an appliance</b><span>One virtual machine for Hyper-V or VMware, hardened and patched as part of each release.</span></div>
+      <div class="ti"><b>Written to be read</b><span>The rules that must never be broken are written down in plain language, with the reason each one exists.</span></div>
+    </div>
+    <div class="cta">
+      <a class="b b1" href="https://reversesecurity.github.io/phishz-site/">PHISHZ</a>
+      <a class="b b2" href="https://reversesecurity.github.io/enforz-site/">ENFORZ</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><img class="on-dark" src="brand/securityz-wordmark-on-dark.webp" alt="SECURITYZ" width="4328" height="426"><img class="on-light" src="brand/securityz-wordmark-on-light.webp" alt="SECURITYZ" width="4328" height="426"></span>
+    <span>&copy; <span id="yr">2026</span> SECURITYZ<a href="https://reversesecurity.github.io/phishz-site/">PHISHZ</a><a href="https://reversesecurity.github.io/enforz-site/">ENFORZ</a></span>
+  </div>
+</footer>
+<script>
+(function(){
+  var r=document.documentElement,k='sz-theme',t=localStorage.getItem(k);
+  if(t)r.setAttribute('data-theme',t);
+  document.getElementById('tg').addEventListener('click',function(){
+    var cur=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+    var n=cur==='light'?'dark':'light';r.setAttribute('data-theme',n);localStorage.setItem(k,n);
+  });
+  document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
